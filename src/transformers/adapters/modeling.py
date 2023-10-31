@@ -359,7 +359,7 @@ class BertFusion(nn.Module):
     def forward(self, query, key, value, residual, output_attentions: bool = False):
 
         if self.config["residual_before"]:
-            value += residual[:, :, None, :].repeat(1, 1, value.size(2), 1)
+            value += residual[:, :, None, :].repeat(1, 1, value.size(2), 1) # [batch,tokens,n, feas] 
 
         if self.config["query"]:
             query_layer = self.query(query)
